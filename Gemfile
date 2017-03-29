@@ -1,9 +1,9 @@
 source 'https://rubygems.org'
 
-git_source(:github) do |repo_name|
-  repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
-  "https://github.com/#{repo_name}.git"
-end
+# git_source(:github) do |repo_name|
+#   repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
+#   "https://github.com/#{repo_name}.git"
+# end
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
@@ -31,6 +31,7 @@ gem 'figaro'
 
 gem 'active_model_serializers'
 
+gem 'devise_token_auth'
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
 gem 'rack-cors'
 
