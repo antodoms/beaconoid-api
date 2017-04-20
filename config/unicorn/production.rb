@@ -1,4 +1,4 @@
-root = "/home/ubuntu/beacon_web_api/current"
+root = "/home/ubuntu/beaconoid_api/current"
 working_directory root
 
 pid "#{root}/tmp/pids/unicorn.pid"
@@ -10,7 +10,7 @@ worker_processes 2 # update this with your preference
 timeout 30
 preload_app true
 
-listen '/tmp/unicorn.beaconwebapi.sock', backlog: 64
+listen '/tmp/unicorn.beaconoidapi.sock', backlog: 64
 
 before_fork do |server, worker|
   Signal.trap 'TERM' do

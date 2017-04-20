@@ -31,8 +31,8 @@
 
 #lock '3.3.5'
 
-set :application, 'beacon_web_api'
-set :repo_url, 'git@github.com:antodoms/beacon-web-api.git'
+set :application, 'beaconoid_api'
+set :repo_url, 'git@github.com:antodoms/beaconoid-api.git'
 
 ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }.call
 
