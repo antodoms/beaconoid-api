@@ -15,6 +15,10 @@ class Api::V1::AdvertisementsController < ApplicationController
 				CustomerTracking.create(customer_id: customer.id, category_id: advertisements.pluck(:category_id), store_id: beacon.store_id, advertisement_id: advertisements.pluck(:id), beacon_id: beacon.id, action: "fetch", time: Time.now)
 				#binding.pry
 
+		        ActionCable.server.broadcast 'beaconoid:store_fetch',
+		            message: beacon.store_id,
+		            user: customer.id
+
 				render json: modify(advertisements)
 			elsif params[:email].present? && params[:advertisement_id].present?
 				customer = Customer.find_or_create_by(:email => params[:email])
@@ -26,6 +30,10 @@ class Api::V1::AdvertisementsController < ApplicationController
 				beacon = advertisement.beacon
 
 				CustomerTracking.create(customer_id: customer.id, category_id: [advertisement.category_id], store_id: beacon.store_id, advertisement_id: [advertisement.id], beacon_id: beacon.id, action: "click", time: Time.now)
+
+				ActionCable.server.broadcast 'beaconoid:store_click',
+		            message: beacon.store_id,
+		            user: customer.id
 
 				render json: {status: :success}
 			else

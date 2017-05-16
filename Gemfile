@@ -13,7 +13,7 @@ gem 'pg'
 gem 'mongoid'
 gem 'aws-sdk', '~>2'
 gem 'dynamoid', '~> 1'
-
+gem 'redis'
 # Use Puma as the app server
 gem 'puma', '~> 3.0'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
