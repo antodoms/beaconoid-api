@@ -47,11 +47,30 @@ class Api::V1::AdvertisementsController < ApplicationController
 		end
 	end
 
-	def modify(ad)
+	def modify(ads)
 		{
 			:status => :success,
-			:advertisements => ad
+			:advertisements => gen_ads(ads)
 		}
 
 	end
+
+	def gen_ads(ads)
+		final_ads = []
+		ads.each do |ad|
+			final_ads << {
+				:id => ad.id,
+				:name => ad.name,
+				:beacon_id => ad.beacon_id,
+				:category_id => ad.category_id,
+				:description => ad.description,
+				:created_at => ad.created_at,
+				:updated_at => ad.updated_at,
+				:image => "https:"+ad.image.url
+			}
+		end
+		final_ads
+	end
+
+
 end
