@@ -11,6 +11,7 @@ gem 'rails', '~> 5.0.1'
 # Use sqlite3 as the database for Active Record
 gem 'pg'
 gem 'mongoid'
+gem "paperclip"
 gem 'aws-sdk', '~>2'
 gem 'dynamoid', '~> 1'
 gem 'redis'
@@ -34,7 +35,6 @@ gem 'active_model_serializers'
 gem 'devise_token_auth'
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
 gem 'rack-cors'
-gem "paperclip"
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
