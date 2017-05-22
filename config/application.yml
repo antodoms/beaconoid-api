@@ -9,3 +9,4 @@ production:
   ACCESS_KEY_ID: AKIAIVNB5GRUFKYIWLAA
   SECRET_ACCESS_KEY: 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
   AWS_REGION: ap-southeast-2
+  S3_HOSTNAME: s3-ap-southeast-2.amazonaws.com
