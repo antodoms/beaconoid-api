@@ -5,7 +5,12 @@ class Api::V1::AdvertisementsController < ApplicationController
 	def index
 		begin
 			if params[:email].present? && params[:beacon_id].present?
-				customer = Customer.find_or_create_by(:email => params[:email])
+				new_customer = 0
+				customer = Customer.find_by(:email => params[:email])
+				if !customer.present?
+					customer = Customer.create(:email => params[:email])
+					new_customer = 1
+				end
 				beacon = Beacon.find_by(:unique_reference => params[:beacon_id])
 				if !beacon.present?
 					raise BeaconNotFound
@@ -19,9 +24,18 @@ class Api::V1::AdvertisementsController < ApplicationController
 		            message: beacon.store_id,
 		            user: customer.id
 
+		        ActionCable.server.broadcast 'beaconoid:general_report',
+		            message: [new_customer,1,0,0,0,0],
+		            user: customer.id
+
 				render json: modify(advertisements)
 			elsif params[:email].present? && params[:advertisement_id].present?
-				customer = Customer.find_or_create_by(:email => params[:email])
+				new_customer = 0
+				customer = Customer.find_by(:email => params[:email])
+				if !customer.present?
+					customer = Customer.create(:email => params[:email])
+					new_customer = 1
+				end
 				advertisement = Advertisement.find_by(id: params[:advertisement_id])
 				if !advertisement.present?
 					raise AdvertisementNotFound
@@ -33,6 +47,10 @@ class Api::V1::AdvertisementsController < ApplicationController
 
 				ActionCable.server.broadcast 'beaconoid:store_click',
 		            message: beacon.store_id,
+		            user: customer.id
+
+		        ActionCable.server.broadcast 'beaconoid:general_report',
+		            message: [new_customer,0,1,0,0,0],
 		            user: customer.id
 
 				render json: {status: :success}
