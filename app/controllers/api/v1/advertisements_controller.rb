@@ -84,6 +84,7 @@ class Api::V1::AdvertisementsController < ApplicationController
 				:description => ad.description,
 				:created_at => ad.created_at,
 				:updated_at => ad.updated_at,
+				:price => ad.price,
 				:image => "https:"+ad.image.url(:medium)
 			}
 		end
